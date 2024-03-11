@@ -1,5 +1,6 @@
 using Apps.Pangeanic.Constants;
 using Apps.Pangeanic.Models.Requests;
+using Apps.Pangeanic.Models.Requests.Api;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Newtonsoft.Json;
@@ -23,6 +24,10 @@ public class PangeanicClient : RestClient
         AuthenticationCredentialsProvider[] creds)
     {
         var url = creds.First(x => x.KeyName == CredsNames.Url).Value;
+        if (url.EndsWith($"/"))
+        {
+            url = url.Remove(url.Length - 1, 1);
+        }
         
         var request = new RestRequest(url + endpoint, method);
         if (bodyObj is not null)

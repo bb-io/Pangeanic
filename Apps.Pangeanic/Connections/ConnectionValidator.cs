@@ -1,7 +1,9 @@
 ﻿using Apps.Pangeanic.Api;
 using Apps.Pangeanic.Constants;
 using Apps.Pangeanic.Models.Requests;
+using Apps.Pangeanic.Models.Requests.Api;
 using Apps.Pangeanic.Models.Responses;
+using Apps.Pangeanic.Models.Responses.Api;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
 using RestSharp;

@@ -1,4 +1,5 @@
 ﻿using Apps.Pangeanic.Models.Responses;
+using Apps.Pangeanic.Models.Responses.Api;
 using Newtonsoft.Json;
 
 namespace Apps.Pangeanic.Utils;

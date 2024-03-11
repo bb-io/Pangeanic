@@ -1,4 +1,4 @@
-﻿namespace Apps.Pangeanic.Models.Responses;
+﻿namespace Apps.Pangeanic.Models.Responses.Api;
 
 public class TagsSelectionResponse
 {

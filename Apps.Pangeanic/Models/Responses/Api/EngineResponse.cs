@@ -2,7 +2,7 @@
 using Blackbird.Applications.Sdk.Common;
 using Newtonsoft.Json;
 
-namespace Apps.Pangeanic.Models.Responses;
+namespace Apps.Pangeanic.Models.Responses.Api;
 
 public class EngineResponse
 {

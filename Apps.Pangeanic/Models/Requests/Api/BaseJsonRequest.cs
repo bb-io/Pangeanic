@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Apps.Pangeanic.Models.Requests;
+namespace Apps.Pangeanic.Models.Requests.Api;
 
 public class BaseJsonRequest
 {

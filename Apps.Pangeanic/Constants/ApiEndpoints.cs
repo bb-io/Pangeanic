@@ -4,4 +4,6 @@ public static class ApiEndpoints
 {
     public const string Corp = "/corp";
     public const string Engines = "/engines";
+    
+    public const string Translate = "/translate";
 }
