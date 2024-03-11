@@ -26,8 +26,8 @@ public class ProcessTextApiRequest : BaseJsonRequest
 
     public ProcessTextApiRequest(ProcessTextRequest request)
     {
-        Src = request.Source;
-        Tgt = request.Target;
+        Src = request.SourceLanguage;
+        Tgt = request.TargetLanguage;
         Engine = request.EngineId;
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = request.Text.ToArray();

@@ -17,12 +17,12 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
     [Action("Process text", Description = "Get engines from api")]
     public async Task<ProcessTextResponse> TranslateText([ActionParameter]ProcessTextRequest request)
     {
-        var response = await Client.ExecuteRequestAsync<ProcessTextApiResponse>(ApiEndpoints.Translate,
+        var response = await Client.ExecuteRequestAsync<List<List<TranslationPairResponse>>>(ApiEndpoints.Translate,
             Method.Post, new ProcessTextApiRequest(request), Creds);
         
         var processedText = new ProcessTextResponse()
         {
-            Translations = response.TranslationPairs.Select(x => x.FirstOrDefault()).ToList()
+            Translations = response.Select(x => x.FirstOrDefault()).ToList()
         };
         
         return processedText;

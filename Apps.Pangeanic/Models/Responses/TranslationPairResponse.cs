@@ -8,6 +8,6 @@ public class TranslationPairResponse
     [JsonProperty("src"), Display("Source text")]
     public string Source { get; set; }
 
-    [JsonProperty("trg"), Display("Target text")]
+    [JsonProperty("tgt"), Display("Target text")]
     public string Target { get; set; }
 }
