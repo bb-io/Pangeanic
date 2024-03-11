@@ -1,4 +1,4 @@
-namespace Apps.App.Constants;
+namespace Apps.Pangeanic.Constants;
 
 public static class CredsNames
 {

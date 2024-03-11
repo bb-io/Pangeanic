@@ -1,4 +1,4 @@
-namespace Apps.App.Api;
+namespace Apps.Pangeanic.Api;
 
 public class AppClient
 {
