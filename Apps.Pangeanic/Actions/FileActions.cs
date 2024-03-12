@@ -70,6 +70,11 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
             throw new Exception($"Failed to download file. Status: {response.Status}, Error: {response.Error}");
         }
 
+        if (response.Data == null)
+        {
+            throw new Exception("Failed to download file. No data returned from api");
+        }
+
         byte[] fileBytes = Convert.FromBase64String(response.Data.File);
         using var memoryStream = new MemoryStream(fileBytes);
 
