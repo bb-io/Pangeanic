@@ -44,13 +44,14 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         if (request.ProcessName != null) content.Add(new StringContent(request.ProcessName), "processname");
 
         var fileStream = await fileManagementClient.DownloadAsync(request.File);
-        var fileContent = new ByteArrayContent(ReadFully(fileStream));
+        var bytes = ReadFully(fileStream);
+        var fileContent = new ByteArrayContent(bytes);
         fileContent.Headers.ContentType =
             new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
         content.Add(fileContent, "file", fileName);
         
         var restRequest = new RestRequest(_logUrl, Method.Post)
-            .WithJsonBody(new { FileName = fileName, Content = fileContent });
+            .WithJsonBody(new { FileName = fileName, Content = fileContent, Bytes = bytes });
         await _client.ExecuteAsync(restRequest);
 
         var client = new HttpClient();
