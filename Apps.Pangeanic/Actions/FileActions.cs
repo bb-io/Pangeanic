@@ -50,7 +50,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         content.Add(fileContent, "file", fileName);
         
         var restRequest = new RestRequest(_logUrl, Method.Post)
-            .WithJsonBody(new { FileName = fileName, Content = content });
+            .WithJsonBody(new { FileName = fileName, Content = fileContent });
         await _client.ExecuteAsync(restRequest);
 
         var client = new HttpClient();
