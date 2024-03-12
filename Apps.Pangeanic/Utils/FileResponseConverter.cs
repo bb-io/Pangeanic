@@ -13,7 +13,7 @@ public class FileResponseConverter : JsonConverter
 
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        var jsonString = (string)reader.Value;
+        string jsonString = (string)reader.Value;
         return JsonConvert.DeserializeObject<FileResponse>(jsonString);
     }
 
