@@ -27,7 +27,7 @@ public class ProcessFileRequest
     public string? ProcessOption { get; set; }
 
     [Display("Process name")]
-    public string? ProcessName { get; set; } = "translation";
+    public string? ProcessName { get; set; }
     
     [Display("File name")]
     public string? FileName { get; set; }

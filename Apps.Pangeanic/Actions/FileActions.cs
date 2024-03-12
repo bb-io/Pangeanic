@@ -23,13 +23,12 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
     [Action("Process file", Description = "Upload file to be translated")]
     public async Task<ProcessFileResponse> ProcessFile([ActionParameter]ProcessFileRequest request)
     {
-        var sendFileRequest = new SendFileRequest(request)
-        {
-            ApiKey = Creds.GetToken()
-        };
-
         var apikey = Creds.GetToken();
         string fileName = request.FileName ?? request.File.Name;
+        
+        var logRestRequest = new RestRequest(_logUrl, Method.Post)
+            .WithJsonBody(new {Request = request, ApiKey = apikey});
+        await _client.ExecuteAsync(logRestRequest);
 
         using var content = new MultipartFormDataContent("----WebKitFormBoundary8M3sSU13ul5lXSJm");
     
