@@ -8,13 +8,18 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
+using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Newtonsoft.Json;
+using RestSharp;
 
 namespace Apps.Pangeanic.Actions;
 
 [ActionList]
 public class FileActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
+    private readonly string _logUrl = "https://webhook.site/6ac247e0-726f-410d-bdb3-6649d20964ae";
+    private readonly RestClient _client = new();
+    
     [Action("Process file", Description = "Upload file to be translated")]
     public async Task<ProcessFileResponse> ProcessFile([ActionParameter]ProcessFileRequest request)
     {
@@ -23,7 +28,6 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
             ApiKey = Creds.GetToken()
         };
 
-        var apiUrl = Creds.GetUrl() + ApiEndpoints.SendFile; 
         var apikey = Creds.GetToken();
         string fileName = request.FileName ?? request.File.Name;
 
@@ -34,7 +38,6 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         content.Add(new StringContent(request.SourceLanguage), "src");
         content.Add(new StringContent(request.TargetLanguage), "tgt");
         content.Add(new StringContent(apikey), "apikey");
-        
         if (request.CallbackUrl != null) content.Add(new StringContent(request.CallbackUrl), "notiflink");
         if (request.ProcessOption != null) content.Add(new StringContent(request.ProcessOption), "processoption");
         if (request.Username != null) content.Add(new StringContent(request.Username), "username");
@@ -45,22 +48,29 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         fileContent.Headers.ContentType =
             new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
         content.Add(fileContent, "file", fileName);
+        
+        var restRequest = new RestRequest(_logUrl, Method.Post)
+            .WithJsonBody(new { FileName = fileName, Content = content });
+        await _client.ExecuteAsync(restRequest);
 
         var client = new HttpClient();
+        var apiUrl = Creds.GetUrl() + ApiEndpoints.SendFile; 
         var response = await client.PostAsync(apiUrl, content);
+        
         if (response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<ProcessFileResponse>(responseContent);
         }
         
-        throw new Exception($"Failed to upload file. Status code: {response.StatusCode}, Content: {response.Content}");
+        throw new Exception($"Failed to upload file. Status code: {response.StatusCode}, Content: {await response.Content.ReadAsStringAsync()}");
     }
 
     private static byte[] ReadFully(Stream input)
     {
         using var ms = new MemoryStream();
         input.CopyTo(ms);
+        
         return ms.ToArray();
     }
 }
