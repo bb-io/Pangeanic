@@ -14,7 +14,7 @@ namespace Apps.Pangeanic.Actions;
 [ActionList]
 public class TextActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
-    [Action("Process text", Description = "Get engines from api")]
+    [Action("Process text", Description = "Send text to be processed and translated by the Pangeanic API")]
     public async Task<ProcessTextResponse> TranslateText([ActionParameter]ProcessTextRequest request)
     {
         var response = await Client.ExecuteRequestAsync<List<List<TranslationPairResponse>>>(ApiEndpoints.Translate,

@@ -11,10 +11,12 @@ namespace Apps.Pangeanic.Webhooks;
 [WebhookList]
 public class WebhookList(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
-    [Webhook("On file translation status updated", Description = "Check for updates on file translations")]
+    [Webhook("On file translation status updated", Description = "Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for")]
     public Task<WebhookResponse<TranslationsResponse>> OnFileTranslationStatusUpdated(
         WebhookRequest webhookRequest, [WebhookParameter]TranslationStatusUpdatedInput input)
     {
+        string translationStatus = input.TranslationStatus ?? "Finished";
+        
         var data = JsonConvert.DeserializeObject<TranslationStatusUpdatedPayload>(webhookRequest.Body.ToString());
         if (data is null)
         {
@@ -27,7 +29,7 @@ public class WebhookList(InvocationContext invocationContext) : AppInvocable(inv
             ReceivedWebhookRequestType = WebhookRequestType.Preflight
         };
         
-        if (!string.IsNullOrEmpty(input.TranslationStatus) && input.TranslationStatus != data.Data.Message)
+        if (translationStatus != data.Data.Message)
         {
             return Task.FromResult(preflightResponse);
         }

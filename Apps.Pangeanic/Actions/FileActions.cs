@@ -18,7 +18,7 @@ namespace Apps.Pangeanic.Actions;
 public class FileActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
     : AppInvocable(invocationContext)
 {
-    [Action("Process file", Description = "Upload file to be translated")]
+    [Action("Process file", Description = "Upload file to be processed and translated by the Pangeanic API")]
     public async Task<ProcessFileResponse> ProcessFile([ActionParameter] ProcessFileRequest request)
     {
         var apikey = Creds.GetToken();
