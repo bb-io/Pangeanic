@@ -7,5 +7,5 @@ namespace Apps.Pangeanic.Webhooks.Payload;
 public class TranslationStatusUpdatedInput
 {
     [Display("Translation status"), DataSource(typeof(TranslationStatusDataHandler))]
-    public string TranslationStatus { get; set; }
+    public string? TranslationStatus { get; set; }
 }
