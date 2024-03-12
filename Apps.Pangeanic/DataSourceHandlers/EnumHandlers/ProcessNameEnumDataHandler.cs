@@ -2,7 +2,7 @@
 
 namespace Apps.Pangeanic.DataSourceHandlers.EnumHandlers;
 
-public class ProcessNameEnumDataHandler: EnumDataHandler
+public class ProcessNameEnumDataHandler : EnumDataHandler
 {
     protected override Dictionary<string, string> EnumValues => new()
     {

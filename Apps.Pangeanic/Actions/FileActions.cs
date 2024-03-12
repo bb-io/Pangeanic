@@ -60,7 +60,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
     [Action("Download file", Description = "Download translated file based on file ID")]
     public async Task<DownloadFileResponse> DownloadFile([ActionParameter] DownloadFileRequest request)
     {
-        var apiRequest = new RetrieveFileRequest(request);
+        var apiRequest = new RetrieveFileRequest(request) { ApiKey = Creds.GetToken() };
         var response =
             await Client.ExecuteRequestAsync<RetrieveFileResponse>(ApiEndpoints.DownloadFile, Method.Post, apiRequest,
                 Creds);
