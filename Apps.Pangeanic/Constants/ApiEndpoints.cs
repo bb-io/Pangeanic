@@ -9,5 +9,7 @@ public static class ApiEndpoints
     public const string Translate = TextProcessing + "/translate";
 
     private const string FileProcessing = "/PGFile/v1";
+    
     public const string SendFile = FileProcessing + "/sendfile";
+    public const string DownloadFile = FileProcessing + "/retrievefile";
 }

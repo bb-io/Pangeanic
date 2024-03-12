@@ -1,29 +1,31 @@
 ﻿using Apps.Pangeanic.Constants;
 using Apps.Pangeanic.Invocables;
 using Apps.Pangeanic.Models.Requests;
+using Apps.Pangeanic.Models.Requests.Api;
 using Apps.Pangeanic.Models.Responses;
+using Apps.Pangeanic.Models.Responses.Api;
 using Apps.Pangeanic.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
-using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Newtonsoft.Json;
 using RestSharp;
 
 namespace Apps.Pangeanic.Actions;
 
 [ActionList]
-public class FileActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
+public class FileActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+    : AppInvocable(invocationContext)
 {
     [Action("Process file", Description = "Upload file to be translated")]
-    public async Task<ProcessFileResponse> ProcessFile([ActionParameter]ProcessFileRequest request)
+    public async Task<ProcessFileResponse> ProcessFile([ActionParameter] ProcessFileRequest request)
     {
         var apikey = Creds.GetToken();
         string fileName = request.FileName ?? request.File.Name;
 
         using var content = new MultipartFormDataContent("----WebKitFormBoundary8M3sSU13ul5lXSJm");
-    
+
         content.Add(new StringContent(fileName), "title");
         content.Add(new StringContent(request.EngineId), "engine");
         content.Add(new StringContent(request.SourceLanguage), "src");
@@ -42,7 +44,7 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         content.Add(fileContent, "file", fileName);
 
         var client = new HttpClient();
-        var apiUrl = Creds.GetUrl() + ApiEndpoints.SendFile; 
+        var apiUrl = Creds.GetUrl() + ApiEndpoints.SendFile;
         var response = await client.PostAsync(apiUrl, content);
 
         if (!response.IsSuccessStatusCode)
@@ -50,16 +52,38 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
             throw new Exception(
                 $"Failed to upload file. Status code: {response.StatusCode}, Content: {await response.Content.ReadAsStringAsync()}");
         }
-        
+
         var responseContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ProcessFileResponse>(responseContent);
+    }
+
+    [Action("Download file", Description = "Download translated file based on file ID")]
+    public async Task<DownloadFileResponse> DownloadFile([ActionParameter] DownloadFileRequest request)
+    {
+        var apiRequest = new RetrieveFileRequest(request);
+        var response =
+            await Client.ExecuteRequestAsync<RetrieveFileResponse>(ApiEndpoints.DownloadFile, Method.Post, apiRequest,
+                Creds);
+
+        if (!response.Success)
+        {
+            throw new Exception($"Failed to download file. Status: {response.Status}, Error: {response.Error}");
+        }
+
+        byte[] fileBytes = Convert.FromBase64String(response.Data.File);
+        using var memoryStream = new MemoryStream(fileBytes);
+
+        var contentType = MimeTypes.GetMimeType(response.Data.FileName);
+        var fileReference = await fileManagementClient.UploadAsync(memoryStream, contentType, response.Data.FileName);
+
+        return new DownloadFileResponse { File = fileReference };
     }
 
     private static byte[] ReadFully(Stream input)
     {
         using var ms = new MemoryStream();
         input.CopyTo(ms);
-        
+
         return ms.ToArray();
     }
 }
