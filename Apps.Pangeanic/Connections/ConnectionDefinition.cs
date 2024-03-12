@@ -10,7 +10,7 @@ public class ConnectionDefinition : IConnectionDefinition
     {
         new ConnectionProperty(CredsNames.Url)
         {
-            DisplayName = "URL", Description = "URL of the service, for example: http://prod.pangeamt.com:8080/NexRelay/v1/", Sensitive = false
+            DisplayName = "URL", Description = "URL of the service, for example: http://prod.pangeamt.com:8080", Sensitive = false
         },
         new ConnectionProperty(CredsNames.ApiKey)
         {

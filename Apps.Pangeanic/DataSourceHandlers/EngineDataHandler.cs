@@ -16,7 +16,7 @@ public class EngineDataHandler(InvocationContext invocationContext)
     public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context,
         CancellationToken cancellationToken)
     {
-        string endpoint = ApiEndpoints.Corp + ApiEndpoints.Engines;
+        string endpoint = ApiEndpoints.Engines;
         var response = await Client.ExecuteRequestAsync<GetEnginesResponse>(endpoint,
             Method.Post, new BaseJsonRequest(), Creds);
 

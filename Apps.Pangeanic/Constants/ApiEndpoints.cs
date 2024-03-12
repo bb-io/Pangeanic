@@ -2,8 +2,12 @@
 
 public static class ApiEndpoints
 {
-    public const string Corp = "/corp";
-    public const string Engines = "/engines";
+    private const string TextProcessing = "/NexRelay/v1";
+    private const string Corp = TextProcessing + "/corp";
     
-    public const string Translate = "/translate";
+    public const string Engines = Corp + "/engines";
+    public const string Translate = TextProcessing + "/translate";
+
+    private const string FileProcessing = "/PGFile/v1";
+    public const string SendFile = FileProcessing + "/sendfile";
 }

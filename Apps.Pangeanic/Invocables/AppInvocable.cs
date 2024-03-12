@@ -1,4 +1,5 @@
 using Apps.Pangeanic.Api;
+using Apps.Pangeanic.Constants;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -11,6 +12,7 @@ public class AppInvocable : BaseInvocable
         InvocationContext.AuthenticationCredentialsProviders.ToArray();
 
     protected PangeanicClient Client { get; }
+    
     public AppInvocable(InvocationContext invocationContext) : base(invocationContext)
     {
         Client = new();

@@ -20,7 +20,7 @@ public class ConnectionValidator: IConnectionValidator
     {
         try
         {
-            await _client.ExecuteRequestAsync<GetEnginesResponse>(ApiEndpoints.Corp + ApiEndpoints.Engines, Method.Post, new BaseJsonRequest(), authenticationCredentialsProviders.ToArray());
+            await _client.ExecuteRequestAsync<GetEnginesResponse>(ApiEndpoints.Engines, Method.Post, new BaseJsonRequest(), authenticationCredentialsProviders.ToArray());
             return new() { IsValid = true };
         }
         catch (Exception e)
