@@ -6,7 +6,43 @@ Blackbird is the new automation backbone for the language technology industry. B
 
 <!-- begin docs -->
 
-Documentation coming soon.
+Pangeanic produces custom AI models so you can create your own Generative AI (GenAI) with no data transfer to third parties.
+
+## Before setting up
+
+Before you can connect you need to make sure that:
+
+- You must have API key for Pangeanic services
+
+- If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/translation-technology/translate-easy).
+
+## Connecting 
+
+1. Navigate to apps and search for Contentstack. If you cannot find Contentstack, then click _Add App_ in the top right corner, select Contentstack, and add the app to your Blackbird environment.
+2. Click _Add Connection_.
+3. Name your connection for future reference, e.g., 'My client'.
+4. In the _API Key_ field, input your API Key.
+5. In the _URL_ field, input URL of your api. For example: http://prod.pangeamt.com:8080/
+5. Click _Connect_.
+6. Confirm that the connection has appeared and the status is _Connected_.
+
+![PangeanicConnection](image/README/PangeanicConnection.png)
+
+## Actions
+
+### Text
+
+- **Process text**: Sends text to the API for processing and translation. It then retrieves the response containing the translations
+
+### File
+
+- **Process file**: Sends file to the API for processing and translation, and then retrieves the response containing the File ID
+
+- **Download file**: Download translated file based on file ID
+
+## Events
+
+- **On file translation status updated**: Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for
 
 ## Feedback
 
