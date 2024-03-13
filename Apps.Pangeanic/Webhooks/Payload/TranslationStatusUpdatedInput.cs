@@ -1,0 +1,11 @@
+﻿using Apps.Pangeanic.DataSourceHandlers.EnumHandlers;
+using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dynamic;
+
+namespace Apps.Pangeanic.Webhooks.Payload;
+
+public class TranslationStatusUpdatedInput
+{
+    [Display("Translation status"), DataSource(typeof(TranslationStatusDataHandler))]
+    public string? TranslationStatus { get; set; }
+}
