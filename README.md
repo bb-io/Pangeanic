@@ -48,6 +48,19 @@ If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/
 
 - **On file translation status updated**: Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for
 
+## Examples
+
+With this app you can build the following birds:
+
+- First bird: 
+![PangeanicExample1](image/README/PangeanicExample1.png)
+
+- Second bird:
+
+![PangeanicExample2](image/README/PangeanicExample2.png)
+
+In short, these birds allow you to upload files to Google Drive, translate them using pangeanic, and once the file is converted, upload it to wherever you want (in this case, DropBox)
+
 ## Feedback
 
 Do you want to use this app or do you have feedback on our implementation? Reach out to us using the [established channels](https://www.blackbird.io/) or create an issue.
