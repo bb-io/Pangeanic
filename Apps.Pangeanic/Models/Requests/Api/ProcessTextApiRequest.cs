@@ -24,19 +24,19 @@ public class ProcessTextApiRequest : BaseJsonRequest
         Text = Array.Empty<string>();
     }
 
-    public ProcessTextApiRequest(ProcessTextRequest request)
+    public ProcessTextApiRequest(ProcessTextRequest request, string src, string tgt)
     {
-        Src = request.SourceLanguage;
-        Tgt = request.TargetLanguage;
+        Src = src;
+        Tgt = tgt;
         Engine = request.EngineId;
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = request.Text.ToArray();
     }
     
-    public ProcessTextApiRequest(ProcessTextAsStringRequest request)
+    public ProcessTextApiRequest(ProcessTextAsStringRequest request, string src, string tgt)
     {
-        Src = request.SourceLanguage;
-        Tgt = request.TargetLanguage;
+        Src = src;
+        Tgt = tgt;
         Engine = request.EngineId;
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = [request.Text];

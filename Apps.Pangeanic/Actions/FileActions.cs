@@ -23,13 +23,15 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
     {
         var apikey = Creds.GetToken();
         string fileName = request.FileName ?? request.File.Name;
+        
+        var engine = await GetEngine(request.EngineId);
 
         using var content = new MultipartFormDataContent("----WebKitFormBoundary8M3sSU13ul5lXSJm");
 
         content.Add(new StringContent(fileName), "title");
         content.Add(new StringContent(request.EngineId), "engine");
-        content.Add(new StringContent(request.SourceLanguage), "src");
-        content.Add(new StringContent(request.TargetLanguage), "tgt");
+        content.Add(new StringContent(engine.Src), "src");
+        content.Add(new StringContent(engine.Tgt), "tgt");
         content.Add(new StringContent(apikey), "apikey");
         content.Add(new StringContent(request.ProcessName), "processname");
         if (request.CallbackUrl != null) content.Add(new StringContent(request.CallbackUrl), "notiflink");

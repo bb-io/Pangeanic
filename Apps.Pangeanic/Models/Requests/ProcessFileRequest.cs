@@ -11,12 +11,6 @@ public class ProcessFileRequest
     [Display("Engine"), DataSource(typeof(EngineDataHandler))]
     public string EngineId { get; set; }
     
-    [Display("Source language")]
-    public string SourceLanguage { get; set; }
-    
-    [Display("Target language")]
-    public string TargetLanguage { get; set; }
-    
     public FileReference File { get; set; }
     
     [Display("Process name"), DataSource(typeof(ProcessNameEnumDataHandler))]

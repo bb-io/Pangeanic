@@ -29,6 +29,6 @@ public class EngineDataHandler(InvocationContext invocationContext)
     
     private string BuildReadableName(EngineResponse engine)
     {
-        return $"{engine.Descr} - {engine.Tgt}";
+        return $"{engine.Descr} [{engine.Src} - {engine.Tgt}]";
     }
 }
