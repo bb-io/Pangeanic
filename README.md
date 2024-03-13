@@ -14,7 +14,7 @@ Before you can connect you need to make sure that:
 
 - You must have API key for Pangeanic services
 
-- If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/translation-technology/translate-easy).
+If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/translation-technology/translate-easy).
 
 ## Connecting 
 
@@ -41,6 +41,8 @@ Before you can connect you need to make sure that:
 - **Download file**: Download translated file based on file ID
 
 ## Events
+
+### Translations
 
 - **On file translation status updated**: Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for
 
