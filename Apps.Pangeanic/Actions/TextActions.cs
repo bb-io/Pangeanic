@@ -14,7 +14,7 @@ namespace Apps.Pangeanic.Actions;
 [ActionList]
 public class TextActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
-    [Action("Process text", Description = "Send text to be processed and translated")]
+    [Action("Process text as array", Description = "Send text to be processed and translated as an array of strings")]
     public async Task<ProcessTextResponse> TranslateText([ActionParameter]ProcessTextRequest request)
     {
         var response = await Client.ExecuteRequestAsync<List<List<TranslationPairResponse>>>(ApiEndpoints.Translate,
@@ -26,5 +26,20 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
         };
         
         return processedText;
+    }
+    
+    [Action("Process text", Description = "Send text to be processed and translated as a single string")]
+    public async Task<TranslationPairResponse> TranslateTextAsSingleString([ActionParameter]ProcessTextAsStringRequest request)
+    {
+        var response = await Client.ExecuteRequestAsync<List<TranslationPairResponse>>(ApiEndpoints.Translate,
+            Method.Post, new ProcessTextApiRequest(request), Creds);
+        
+        var translation = response.FirstOrDefault();
+        if(translation == null)
+        {
+            throw new Exception("No translation found");
+        }
+        
+        return translation;
     }
 }

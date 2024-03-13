@@ -32,4 +32,13 @@ public class ProcessTextApiRequest : BaseJsonRequest
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = request.Text.ToArray();
     }
+    
+    public ProcessTextApiRequest(ProcessTextAsStringRequest request)
+    {
+        Src = request.SourceLanguage;
+        Tgt = request.TargetLanguage;
+        Engine = request.EngineId;
+        GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
+        Text = [request.Text];
+    }
 }

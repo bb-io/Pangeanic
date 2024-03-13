@@ -2,8 +2,8 @@
 
 namespace Apps.Pangeanic.Models.Requests;
 
-public class ProcessTextRequest : ProcessTextRequestBase
+public class ProcessTextAsStringRequest : ProcessTextRequestBase
 {
     [Display("Text")]
-    public IEnumerable<string> Text { get; set; }
+    public string Text { get; set; }
 }
