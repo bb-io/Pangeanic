@@ -31,10 +31,10 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
     [Action("Process text", Description = "Send text to be processed and translated as a single string")]
     public async Task<ProcessTextAsStringResponse> TranslateTextAsSingleString([ActionParameter]ProcessTextAsStringRequest request)
     {
-        var response = await Client.ExecuteRequestAsync<List<TranslationPairResponse>>(ApiEndpoints.Translate,
+        var response = await Client.ExecuteRequestAsync<List<List<TranslationPairResponse>>>(ApiEndpoints.Translate,
             Method.Post, new ProcessTextApiRequest(request), Creds);
         
-        var translation = response.FirstOrDefault();
+        var translation = response.FirstOrDefault()?.FirstOrDefault();
         if(translation == null)
         {
             throw new Exception("No translation found");
