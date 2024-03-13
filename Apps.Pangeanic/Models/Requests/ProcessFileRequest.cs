@@ -16,7 +16,7 @@ public class ProcessFileRequest
     [Display("Process name"), DataSource(typeof(ProcessNameEnumDataHandler))]
     public string ProcessName { get; set; }
     
-    public string Username { get; set; }
+    public string? Username { get; set; }
 
     [Display("Callback URL")]
     public string? CallbackUrl { get; set; }

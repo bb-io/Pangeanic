@@ -36,7 +36,9 @@ public class FileActions(InvocationContext invocationContext, IFileManagementCli
         content.Add(new StringContent(request.ProcessName), "processname");
         if (request.CallbackUrl != null) content.Add(new StringContent(request.CallbackUrl), "notiflink");
         if (request.ProcessOption != null) content.Add(new StringContent(request.ProcessOption), "processoption");
-        if (request.Username != null) content.Add(new StringContent(request.Username), "username");
+        
+        string username = request.Username ?? "blackbird";
+        content.Add(new StringContent(username), "username");
 
         var fileStream = await fileManagementClient.DownloadAsync(request.File);
         var bytes = ReadFully(fileStream);
