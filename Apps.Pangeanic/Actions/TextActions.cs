@@ -29,7 +29,7 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
     }
     
     [Action("Process text", Description = "Send text to be processed and translated as a single string")]
-    public async Task<ProcessTextAsStringResponse> TranslateTextAsSingleString([ActionParameter]ProcessTextAsStringRequest request)
+    public async Task<TranslationPairResponse> TranslateTextAsSingleString([ActionParameter]ProcessTextAsStringRequest request)
     {
         var response = await Client.ExecuteRequestAsync<List<List<TranslationPairResponse>>>(ApiEndpoints.Translate,
             Method.Post, new ProcessTextApiRequest(request), Creds);
@@ -40,6 +40,6 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
             throw new Exception("No translation found");
         }
         
-        return new ProcessTextAsStringResponse { Source = translation.Source, Target = translation.Target };
+        return translation;
     }
 }

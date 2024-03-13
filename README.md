@@ -32,7 +32,9 @@ If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/
 
 ### Text
 
-- **Process text**: Sends text to the API for processing and translation. It then retrieves the response containing the translations
+- **Process text**: Sends text to be processed and translated as a single string
+
+- **Process text as array**: Sends text to be processed and translated as an array of strings
 
 ### File
 
