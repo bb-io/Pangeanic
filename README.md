@@ -53,13 +53,22 @@ If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/
 With this app you can build the following birds:
 
 - First bird: 
+
 ![PangeanicExample1](image/README/PangeanicExample1.png)
 
 - Second bird:
 
 ![PangeanicExample2](image/README/PangeanicExample2.png)
 
-In short, these birds allow you to upload files to Google Drive, translate them using pangeanic, and once the file is converted, upload it to wherever you want (in this case, DropBox)
+In short, these birds allow you to upload files to Google Drive, translate them using Pangeanic, and once the file is translated, upload it to wherever you want (in this case, Dropbox).
+
+Also, note that to use the Pangeanic 'On file translation status updated' event, you should publish it and then copy the 'Webhook URL':
+
+![Pangeanic-callback-url](image/README/Pangeanic-callback-url.png)
+
+Paste this URL into the 'Callback URL' optional input of the 'Process file' action:
+
+![Pangeanic-callback-url2](image/README/Pangeanic-callback-url2.png)
 
 ## Feedback
 
