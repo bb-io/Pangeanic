@@ -48,6 +48,28 @@ If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/
 
 - **On file translation status updated**: Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for
 
+## Examples
+
+With this app you can build the following birds:
+
+- First bird: 
+
+![PangeanicExample1](image/README/PangeanicExample1.png)
+
+- Second bird:
+
+![PangeanicExample2](image/README/PangeanicExample2.png)
+
+In short, these birds allow you to upload files to Google Drive, translate them using Pangeanic, and once the file is translated, upload it to wherever you want (in this case, Dropbox).
+
+Also, note that to use the Pangeanic 'On file translation status updated' event, you should publish it and then copy the 'Webhook URL':
+
+![Pangeanic-callback-url](image/README/Pangeanic-callback-url.png)
+
+Paste this URL into the 'Callback URL' optional input of the 'Process file' action:
+
+![Pangeanic-callback-url2](image/README/Pangeanic-callback-url2.png)
+
 ## Feedback
 
 Do you want to use this app or do you have feedback on our implementation? Reach out to us using the [established channels](https://www.blackbird.io/) or create an issue.

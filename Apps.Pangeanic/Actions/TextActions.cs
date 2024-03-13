@@ -14,7 +14,7 @@ namespace Apps.Pangeanic.Actions;
 [ActionList]
 public class TextActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
-    [Action("Process text as array", Description = "Send text to be processed and translated as an array of strings")]
+    [Action("Process multiple texts", Description = "Send multiple texts to be processed and translated")]
     public async Task<ProcessTextResponse> TranslateText([ActionParameter] ProcessTextRequest request)
     {
         var engine = await GetEngine(request.EngineId);
