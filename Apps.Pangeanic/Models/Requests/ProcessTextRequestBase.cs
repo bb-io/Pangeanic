@@ -11,4 +11,10 @@ public abstract class ProcessTextRequestBase
 
     [Display("Glossary ID")]
     public string? GlossaryId { get; set; }
+
+    public double? Sensitivity { get; set; }
+
+    public string? Type { get; set; }
+
+    public IEnumerable<string>? Tags { get; set; }
 }

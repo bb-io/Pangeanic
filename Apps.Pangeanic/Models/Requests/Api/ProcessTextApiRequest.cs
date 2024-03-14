@@ -19,6 +19,9 @@ public class ProcessTextApiRequest : BaseJsonRequest
     [JsonProperty("text")]
     public string[] Text { get; set; }
 
+    [JsonProperty("runparms")]
+    public RunParamsModel RunParams { get; set; }
+
     public ProcessTextApiRequest()
     {
         Text = Array.Empty<string>();
@@ -31,6 +34,12 @@ public class ProcessTextApiRequest : BaseJsonRequest
         Engine = request.EngineId;
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = request.Text.ToArray();
+        RunParams = new RunParamsModel()
+        {
+            Sensitivity = request.Sensitivity?.ToString(),
+            Type = request.Type,
+            Tags = request.Tags?.ToList()
+        };
     }
     
     public ProcessTextApiRequest(ProcessTextAsStringRequest request, string src, string tgt)
@@ -40,5 +49,11 @@ public class ProcessTextApiRequest : BaseJsonRequest
         Engine = request.EngineId;
         GlossaryId = request.GlossaryId != null ? int.Parse(request.GlossaryId) : null;
         Text = [request.Text];
+        RunParams = new RunParamsModel()
+        {
+            Sensitivity = request.Sensitivity?.ToString(),
+            Type = request.Type,
+            Tags = request.Tags?.ToList()
+        };
     }
 }
