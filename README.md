@@ -36,6 +36,8 @@ If you don't have an API key, you can contact [Pangeanic](https://pangeanic.com/
 
 - **Process text as array**: Sends text to be processed and translated as an array of strings
 
+In the process text actions, you have the option to specify anonymization settings, including sensitivity, type, and tags.
+
 ### File
 
 - **Process file**: Sends file to the API for processing and translation, and then retrieves the response containing the File ID
