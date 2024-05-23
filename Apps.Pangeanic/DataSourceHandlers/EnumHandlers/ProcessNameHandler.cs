@@ -2,14 +2,11 @@
 
 namespace Apps.Pangeanic.DataSourceHandlers.EnumHandlers;
 
-public class TranslationStatusDataHandler : IStaticDataSourceHandler
+public class ProcessNameHandler : IStaticDataSourceHandler
 {
     private static Dictionary<string, string> EnumValues => new()
     {
-        { "Preprocessing", "Preprocessing" },
-        { "Processing", "Processing" },
-        { "PostProcessing", "Postprocessing" },
-        { "Finished", "Finished" },
+        { "translation", "Translation" }
     };
 
     public Dictionary<string, string> GetData()

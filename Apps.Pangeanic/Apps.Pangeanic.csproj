@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>Pangeanic</Product>
         <Description>Pangeanic produces custom AI models so you can create your own Generative AI (GenAI) with no data transfer to third parties. </Description>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <PackageId>Apps.Pangeanic</PackageId>
         <RootNamespace>Apps.Pangeanic</RootNamespace>
         <AssemblyName>Apps.Pangeanic</AssemblyName>

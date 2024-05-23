@@ -20,7 +20,7 @@ public class ProcessTextApiRequest : BaseJsonRequest
     public string[] Text { get; set; }
 
     [JsonProperty("runparms")]
-    public RunParamsModel RunParams { get; set; }
+    public RunParamsModel? RunParams { get; set; }
 
     public ProcessTextApiRequest()
     {
@@ -36,9 +36,9 @@ public class ProcessTextApiRequest : BaseJsonRequest
         Text = request.Text.ToArray();
         RunParams = new RunParamsModel()
         {
-            Sensitivity = request.Sensitivity?.ToString(),
+            Sensitivity = request.Sensitivity,
             Type = request.Type,
-            Tags = request.Tags?.ToList()
+            Tags = request.Tags?.ToList() ?? new List<string>()
         };
     }
     
