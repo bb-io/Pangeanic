@@ -1,6 +1,7 @@
 ﻿using Apps.Pangeanic.DataSourceHandlers;
 using Apps.Pangeanic.DataSourceHandlers.EnumHandlers;
 using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Blackbird.Applications.Sdk.Common.Dynamic;
 using Blackbird.Applications.Sdk.Common.Files;
 
@@ -13,7 +14,7 @@ public class ProcessFileRequest
     
     public FileReference File { get; set; }
     
-    [Display("Process name"), DataSource(typeof(ProcessNameEnumDataHandler))]
+    [Display("Process name"), StaticDataSource(typeof(ProcessNameHandler))]
     public string ProcessName { get; set; }
     
     public string? Username { get; set; }
