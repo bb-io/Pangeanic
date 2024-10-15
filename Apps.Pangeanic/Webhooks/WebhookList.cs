@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Apps.Pangeanic.Invocables;
+using Apps.Pangeanic.Models.Requests;
 using Apps.Pangeanic.Webhooks.Models.Responses;
 using Apps.Pangeanic.Webhooks.Payload;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -13,7 +14,9 @@ public class WebhookList(InvocationContext invocationContext) : AppInvocable(inv
 {
     [Webhook("On file translation status updated", Description = "Check for updates on file translations. By default, it checks for finished translations. You can specify the status to check for")]
     public Task<WebhookResponse<TranslationsResponse>> OnFileTranslationStatusUpdated(
-        WebhookRequest webhookRequest, [WebhookParameter]TranslationStatusUpdatedInput input)
+        WebhookRequest webhookRequest, 
+        [WebhookParameter] TranslationStatusUpdatedInput input,
+        [WebhookParameter] FileOptionalRequest fileOptionalRequest)
     {
         string translationStatus = input.TranslationStatus ?? "Finished";
         
@@ -30,6 +33,11 @@ public class WebhookList(InvocationContext invocationContext) : AppInvocable(inv
         };
         
         if (translationStatus != data.Data.Message)
+        {
+            return Task.FromResult(preflightResponse);
+        }
+        
+        if(fileOptionalRequest.FileId != null && fileOptionalRequest.FileId != data.FileId)
         {
             return Task.FromResult(preflightResponse);
         }
