@@ -5,6 +5,7 @@ using Apps.Pangeanic.Models.Requests.Api;
 using Apps.Pangeanic.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using RestSharp;
 
@@ -43,7 +44,7 @@ public class TextActions(InvocationContext invocationContext) : AppInvocable(inv
         var translation = response.FirstOrDefault()?.FirstOrDefault();
         if (translation == null)
         {
-            throw new Exception("No translation found");
+            throw new PluginApplicationException("No translation found");
         }
 
         return translation;

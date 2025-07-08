@@ -1,0 +1,7 @@
+{
+  "ConnectionDefinition": {
+    "app_id": "",
+    "app_secret": ""
+  },
+  "TestFolder": "TestFiles"
+}
