@@ -11,7 +11,7 @@ using RestSharp;
 
 namespace Apps.Pangeanic.Actions;
 
-[ActionList]
+[ActionList("Text")]
 public class TextActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
     [Action("Process multiple texts", Description = "Send multiple texts to be processed and translated")]

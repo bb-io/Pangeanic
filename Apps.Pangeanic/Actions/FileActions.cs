@@ -15,7 +15,7 @@ using RestSharp;
 
 namespace Apps.Pangeanic.Actions;
 
-[ActionList]
+[ActionList("Files")]
 public class FileActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
     : AppInvocable(invocationContext)
 {
