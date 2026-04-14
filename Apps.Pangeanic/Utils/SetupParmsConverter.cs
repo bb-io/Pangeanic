@@ -1,6 +1,6 @@
-﻿using Apps.Pangeanic.Models.Responses;
 using Apps.Pangeanic.Models.Responses.Api;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Apps.Pangeanic.Utils;
 
@@ -11,16 +11,39 @@ public class SetupParmsConverter : JsonConverter
         return objectType == typeof(SetupParmsResponse);
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        // Deserialize the nested JSON string.
-        var jsonString = (string)reader.Value;
-        return JsonConvert.DeserializeObject<SetupParmsResponse>(jsonString);
+        if (reader.TokenType == JsonToken.Null)
+            return new SetupParmsResponse();
+
+        if (reader.TokenType == JsonToken.String)
+        {
+            var jsonString = reader.Value?.ToString();
+
+            if (string.IsNullOrWhiteSpace(jsonString))
+                return new SetupParmsResponse();
+
+            return JsonConvert.DeserializeObject<SetupParmsResponse>(jsonString) ?? new SetupParmsResponse();
+        }
+
+        if (reader.TokenType == JsonToken.StartObject)
+        {
+            var token = JToken.Load(reader);
+            return token.ToObject<SetupParmsResponse>(serializer) ?? new SetupParmsResponse();
+        }
+
+        throw new JsonSerializationException(
+            $"Unexpected token {reader.TokenType} when parsing setup parameters.");
     }
 
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        // Serialize the object back to a JSON string.
+        if (value == null)
+        {
+            writer.WriteNull();
+            return;
+        }
+
         var jsonString = JsonConvert.SerializeObject(value);
         writer.WriteValue(jsonString);
     }

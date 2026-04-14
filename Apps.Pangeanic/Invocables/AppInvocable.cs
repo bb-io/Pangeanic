@@ -20,14 +20,19 @@ public class AppInvocable : BaseInvocable
     {
         Client = new();
     }
-    
-    protected async Task<EngineResponse> GetEngine(string engineId)
+
+    protected async Task<List<EngineResponse>> GetEngines()
     {
         string endpoint = ApiEndpoints.Engines;
         var response = await Client.ExecuteRequestAsync<GetEnginesResponse>(endpoint,
             Method.Post, new BaseJsonRequest(), Creds);
 
-        return response.Engines.FirstOrDefault(x => x.Id.ToString() == engineId) ??
+        return response.Engines;
+    }
+    
+    protected async Task<EngineResponse> GetEngine(string engineId)
+    {
+        return (await GetEngines()).FirstOrDefault(x => x.Id.ToString() == engineId) ??
                throw new Exception("Engine not found");
     }
 }
