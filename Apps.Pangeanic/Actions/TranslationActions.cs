@@ -76,7 +76,7 @@ public class TranslationActions(InvocationContext invocationContext, IFileManage
     }
 
     [BlueprintActionDefinition(BlueprintAction.TranslateFile)]
-    [Action("Translate file", Description = "Translate a file by using Blackbird interoperability or Pangeanic native translation")]
+    [Action("Translate", Description = "Translate a file by using Blackbird interoperability or Pangeanic native translation")]
     public async Task<TranslateFileResponse> TranslateFile([ActionParameter] TranslateFileRequest input)
     {
         if (input.File == null)
