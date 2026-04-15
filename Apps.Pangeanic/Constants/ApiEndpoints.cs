@@ -11,5 +11,6 @@ public static class ApiEndpoints
     private const string FileProcessing = "/PGFile/v1";
     
     public const string SendFile = FileProcessing + "/sendfile";
+    public const string CheckFile = FileProcessing + "/checkfile";
     public const string DownloadFile = FileProcessing + "/retrievefile";
 }

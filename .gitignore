@@ -366,3 +366,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Tests.Pangeanic/appsettings.json
+/Tests.Pangeanic/appsettings.json
