@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>Pangeanic</Product>
         <Description>Pangeanic produces custom AI models so you can create your own Generative AI (GenAI) with no data transfer to third parties. </Description>
-        <Version>1.0.8</Version>
+        <Version>1.0.9</Version>
         <PackageId>Apps.Pangeanic</PackageId>
         <RootNamespace>Apps.Pangeanic</RootNamespace>
         <AssemblyName>Apps.Pangeanic</AssemblyName>
@@ -27,4 +27,7 @@
         <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
+    </ItemGroup>
 </Project>
